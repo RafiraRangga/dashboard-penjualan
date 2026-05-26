@@ -205,7 +205,7 @@ if not df_filtered.empty:
     )
 
     st.markdown("---")
-    csv = df_filtered.to_csv(index=False).encode("utf-8")
+    csv = csv = df_filtered.to_csv(index=False, sep=";").encode("utf-8-sig")
     st.download_button("📥 Export CSV", csv, "penjualan_export.csv", "text/csv")
 
 else:
