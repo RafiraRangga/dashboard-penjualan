@@ -1,0 +1,6 @@
+@"
+streamlit
+pandas
+plotly
+openpyxl
+"@ | Out-File -FilePath requirements.txt -Encoding UTF8
