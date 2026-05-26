@@ -226,3 +226,4 @@ if not df_filtered.empty:
     )
 
 else:
+st.info("📭 Belum ada data. Tambahkan transaksi di sidebar kiri.")
