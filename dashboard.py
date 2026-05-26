@@ -125,7 +125,7 @@ st.caption("WiFi Voucher — 3 Jam / 5 Jam / 8 Jam / Daftar Baru / Per Bulan")
 
 # ─── CHARTS & METRICS ─────────────────────────
 if not df_filtered.empty:
-col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4 = st.columns(4)
     total_penjualan = df_filtered["total"].sum()
     total_transaksi = len(df_filtered)
     rata_rata = df_filtered["total"].mean()
