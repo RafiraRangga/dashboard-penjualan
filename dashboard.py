@@ -48,8 +48,8 @@ def load_data():
     return generate_sample_data()
 
 # ─── SIDEBAR ──────────────────────────────────
-st.sidebar.title("📊 Dashboard Penjualan")
-st.sidebar.caption("CU Sarana Bina Insani")
+st.sidebar.title("📊 Dashboard Penjualan AFGANET")
+st.sidebar.caption("AFGANET")
 
 # Filter
 df = load_data()
