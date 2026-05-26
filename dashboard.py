@@ -39,7 +39,6 @@ check_password()
 # ─── DATA FILE ────────────────────────────────
 DATA_FILE = "sales_data.csv"
 
-# Kolom: tanggal, produk, qty, harga_satuan, total, pembayaran
 PRODUK = {
     "Voucher 3 Jam": 2000,
     "Voucher 5 Jam": 3000,
@@ -124,9 +123,9 @@ st.sidebar.caption("💾 Data tersimpan di sales_data.csv")
 st.title("📡 Dashboard Penjualan AFGANET")
 st.caption("WiFi Voucher — 3 Jam / 5 Jam / 8 Jam / Daftar Baru / Per Bulan")
 
-# ─── METRIC CARDS ─────────────────────────────
+# ─── CHARTS & METRICS ─────────────────────────
 if not df_filtered.empty:
-    col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3, col4 = st.columns(4)
     total_penjualan = df_filtered["total"].sum()
     total_transaksi = len(df_filtered)
     rata_rata = df_filtered["total"].mean()
@@ -139,7 +138,6 @@ if not df_filtered.empty:
 
     st.markdown("---")
 
-    # ─── CHARTS ───────────────────────────────
     col_left, col_right = st.columns(2)
 
     with col_left:
@@ -189,7 +187,6 @@ if not df_filtered.empty:
 
     st.markdown("---")
 
-    # ─── DATA TABLE ───────────────────────────
     st.subheader("📋 Detail Transaksi")
     search = st.text_input("🔍 Cari produk / tanggal / pembayaran...")
 
@@ -205,25 +202,17 @@ if not df_filtered.empty:
         df_display.sort_values("tanggal", ascending=False),
         use_container_width=True,
         hide_index=True,
-        column_config={
-            "tanggal": "Tanggal",
-            "produk": "Produk",
-            "qty": st.column_config.NumberColumn("Qty"),
-            "harga_satuan": "Harga Satuan",
-            "total": "Total",
-            "pembayaran": "Bayar"
-        }
     )
 
-    # ─── EXPORT ───────────────────────────────
     st.markdown("---")
     csv = df_filtered.to_csv(index=False).encode("utf-8")
-    st.download_button(
-        "📥 Export CSV",
-        csv,
-        "penjualan_export.csv",
-        "text/csv"
-    )
+    st.download_button("📥 Export CSV", csv, "penjualan_export.csv", "text/csv")
 
 else:
-st.info("📭 Belum ada data. Tambahkan transaksi di sidebar kiri.")
+    st.info("📭 Belum ada data. Tambahkan transaksi di sidebar kiri.")
+    st.markdown("---")
+    st.subheader("📋 Daftar Harga")
+    harga_df = pd.DataFrame([
+        {"Produk": k, "Harga": f"Rp {v:,.0f}"} for k, v in PRODUK.items()
+    ])
+    st.dataframe(harga_df, use_container_width=True, hide_index=True)
